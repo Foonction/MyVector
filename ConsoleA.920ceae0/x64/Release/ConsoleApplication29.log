@@ -1,6 +1,9 @@
 ﻿  ConsoleApplication29.cpp
+C:\Users\HP\source\repos\ConsoleApplication29\ConsoleApplication29.cpp(214,20): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\HP\source\repos\ConsoleApplication29\ConsoleApplication29.cpp(260,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\HP\source\repos\ConsoleApplication29\ConsoleApplication29.cpp(313,7): warning C4834: удаление возвращаемого значения функции с атрибутом [[nodiscard]]
   Создание кода
-  2 of 35 functions ( 5.7%) were compiled, the rest were copied from previous compilation.
+  1 of 117 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
