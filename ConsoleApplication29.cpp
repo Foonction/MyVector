@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <vector>
-template <typename T, typename Allocator = std::allocator<T>>
+template <typename T = int, typename Allocator = std::allocator<T>>
 class MyVector
 {
 public:
@@ -33,13 +33,13 @@ public:
 			data[i] = other.data[i];
 	}
 
-	auto Begin() 
+	auto begin() 
 	{
 		auto it = data;
 		return it;
 	}
 
-	auto End() 
+	auto end() 
 	{
 		auto it = data;
 		it += size;
@@ -63,12 +63,12 @@ public:
 		return *this;
 	}
 
-	size_t Size() const
+	size_t size() const
 	{
 		return size;
 	}
 
-	void Erase(auto begin, auto end) {
+	void erase(auto begin, auto end) {
 		int b = -1, e = -1;
 		auto it = data;
 
@@ -88,7 +88,7 @@ public:
 			return;
 
 		size_t newSize = size - (e - b);
-		auto n_data = new int[capacity]; 
+		auto n_data = _alloc.allocate(capacity);
 
 		int current = 0;
 		for (int i = 0; i < size; i++) {
@@ -97,19 +97,19 @@ public:
 			}
 		}
 
-		delete[] data;
+		_alloc.deallocate(data, capacity);
 		data = n_data;
 		size = newSize;
 	}
 
 	int front()
 	{
-		return data[0];
+		return data;
 	}
 
-	void Pop_Back() 
+	void pop_back() 
 	{
-		int* new_data = new int[size - 1];
+		int* new_data = _alloc.allocate(size - 1);
 
 		for (int i = 0, j = 0; i < size; ++i) {
 			if (i == size - 1) {
@@ -119,27 +119,27 @@ public:
 			j++;
 		}
 
-		delete[] data;
+		_alloc.deallocate(data, capacity);
 		data = new_data;
 		size--;
 	}
 
-	void Resize(int new_size)
+	void resize(int new_size)
 	{
 		if (new_size >= size)
 		{
 			size = new_size;
-			int* new_data = new int[new_size];
+			int* new_data = _alloc.allocate(new_size);
 			for (size_t i = 0; i < size; i++)
 			{
 				new_data[i] = data[i];
 			}
-			delete[] data;
+			_alloc.deallocate(data, capacity);
 			data = new_data;
 		}
 	}
 
-	size_t Capacity()
+	size_t capacity()
 	{
 		return capacity;
 	}
@@ -178,7 +178,7 @@ public:
 		{
 			newData[i + 1] = data[i];
 		}
-		delete[] data;
+		_alloc.deallocate(data, capacity);
 		data = newData;
 		capacity = newCapacity;
 		size++; 
@@ -223,29 +223,25 @@ public:
 
 	const int* crend() const
 	{
-		int* cr = new int(size);
-		for (size_t i = 0; i < size; i++)
-		{
-			cr[size - i - 1] = data[i];
-		}
-		const int* new_cr = cr + size;
-		return new_cr;
+		return data - 1;
 	}
 
-	int* Data()
+	int* data()
 	{
 		return data;
 	}
 
-	void Push_Back(int num)
+	void push_back(int num)
 	{
 		if (size == capacity)
 		{
 			size_t newCapacity = capacity * 2;
-			int* newData = new int[newCapacity];
-			for (size_t i = 0; i < size; ++i)
+			int* newData = _alloc.allocate(newCapacity);
+			for (size_t i = 0; i < size; i++)
+			{
 				newData[i] = data[i];
-			delete[] data;
+			}
+			_alloc.deallocate(data, capacity);
 			data = newData;
 			capacity = newCapacity;
 		}
@@ -269,8 +265,8 @@ public:
 
 	void assign(size_t new_size, int value)
 	{
-		int* new_data = new int[new_size];
-		delete[] data;
+		int* new_data = _alloc.allocate(new_size);
+		_alloc.deallocate(data, capacity);
 		size = new_size;
 		capacity = new_size;
 		data = new_data;
@@ -284,10 +280,11 @@ public:
 	{
 		return data[index];
 	}
-	void Clear()
+	void clear()
 	{
-		delete[] data;
-
+		_alloc.deallocate(data, capacity);
+		size = 0;
+		capacity = 0;
 	}
 
 private:
@@ -302,29 +299,9 @@ int main()
 	MyVector vec;
 	std::vector<int> vec2;
 	//vec2.push_back(1);
-	vec2.push_back(123321);
-	vec2.push_back(148);
-	vec2.push_back(124421);
-	
-	auto it = vec2;
-	//vec2.pop_back();
-	//std::cout << vec2.at(0);
-	//std::cout << vec2[0] << std::endl;
-	//std::cout << *vec2.begin();
-	vec.Push_Back(2);
-	vec.Push_Back(123);
-	vec.Push_Back(124);
-	vec.insert(vec.End(), 1);
-	vec.emplace(vec.Begin(), 123);
-	std::cout << vec;
-	//std::cout << vec;
-	//std::cout << vec2.capacity();
-	//std::cout << *(vec.crbegin() - 1);
-	//std::cout << *(vec.crend() - 1);
-	//std::cout << vec.front() + 1;
-	//std::cout << vec[0];(
-	std::cout << vec2.get_allocator().max_size();
-	
+	vec.push_back(123321);
+	vec.push_back(148);
+	vec.push_back(124421);
 	
 }
 
