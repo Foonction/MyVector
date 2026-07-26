@@ -14,8 +14,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsoleApplication29.cpp",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\ConsoleApplication29\\ConsoleApplication29.cpp",
+              "RelativeDocumentMoniker": "ConsoleApplication29.cpp",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\ConsoleApplication29\\ConsoleApplication29.cpp",
+              "RelativeToolTip": "ConsoleApplication29.cpp",
+              "ViewState": "AgIAADMAAAAAAAAAAAAuwDoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-03T15:34:57.669Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -23,19 +37,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ConsoleApplication29.cpp",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\ConsoleApplication29\\ConsoleApplication29.cpp",
-              "RelativeDocumentMoniker": "ConsoleApplication29.cpp",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\ConsoleApplication29\\ConsoleApplication29.cpp*",
-              "RelativeToolTip": "ConsoleApplication29.cpp*",
-              "ViewState": "AgIAACMBAAAAAAAAAAAAADgBAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-03T15:34:57.669Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -15,19 +15,19 @@ public:
 	{
 		return _alloc;
 	}
-	MyVector() : data(new int[1]), size(0), capacity(1)
+	MyVector() : size(0), capacity(1)
 	{
-	
+		data = _alloc.allocate(1);
 	}
 
 	~MyVector()
 	{
-		delete[] data;
+		_alloc.deallocate(data, capacity);
 	}
 
 	// copy constructor (deep copy)
 	MyVector(const MyVector& other)
-		: data(new int[other.capacity]), size(other.size), capacity(other.capacity)
+		: data(_alloc.allocate(other.capacity)), size(other.size), capacity(other.capacity)
 	{
 		for (size_t i = 0; i < size; ++i) 
 			data[i] = other.data[i];
@@ -51,12 +51,12 @@ public:
 		if (this == &other)	
 			return *this;
 
-		int* newData = new int[other.capacity];
+		int* newData = _alloc.allocate(other.capacity);
 
 		for (size_t i = 0; i < other.size; ++i) 
 			newData[i] = other.data[i];
 
-		delete[] data;
+		_alloc.deallocate(data, capacity);
 		data = newData;
 		size = other.size;
 		capacity = other.capacity;
@@ -269,7 +269,7 @@ public:
 
 	void assign(size_t new_size, int value)
 	{
-		int* new_data = new int(new_size);
+		int* new_data = new int[new_size];
 		delete[] data;
 		size = new_size;
 		capacity = new_size;
